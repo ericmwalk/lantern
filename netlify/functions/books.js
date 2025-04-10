@@ -21,7 +21,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: 'API key not configured.' }),
     };
   }
-//  const apiKey = 'BOOKS_API'; // Replace with your actual Google Books API key
+
   const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}&maxResults=20&key=${apiKey}`;
 //  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchTerm)}&key=${apiKey}`;
   
