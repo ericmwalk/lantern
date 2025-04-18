@@ -232,9 +232,16 @@
                 } else {
                     el.dataset.authors = ''; // Ensure it's empty for non-book types
                 }
+                        
+             // Create a title with the format: "Title (by Authors) (Year)"
+                let titleText = result.title;
+                if (result.authors) {
+                    titleText += ` by ${result.authors}`;
+                }
+                if (result.year) {
+                    titleText += ` (${result.year})`;
+                }
             
-                // Create a title with the format: "Title - Authors (Year)"
-                const titleText = `${result.title}${result.authors ? ` by ${result.authors}` : ''}${result.year ? ` (${result.year})` : ''}`;
                 el.getElementsByClassName('result__title')[0].innerText = titleText;
             
                 // Set background image (if available)
@@ -244,7 +251,6 @@
             
                 document.getElementById('search-results').append(el);
             };
-
 
         })();
     </script>
