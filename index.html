@@ -228,8 +228,8 @@
             
                 let titleText = result.title;
             
-                // Add authors and "by" only if the selected type is "book"
-                if (getActiveType() === 'book' && result.authors) {
+                // Add authors and "by" only if the selected type is "book" and authors exist
+                if (getActiveType() === 'book' && result.authors && result.authors.trim() !== '') {
                     titleText += ` by ${result.authors}`;
                 }
             
@@ -247,8 +247,6 @@
             
                 document.getElementById('search-results').append(el);
             };
-
-
 
         })();
     </script>
