@@ -2,7 +2,7 @@
 
 Post movie, TV, game, and book reviews to Micro.blog
 
-![screenshot](screenshot.png)
+
 
 This work was forked from what Robb originally built and is found here: 
 -> [https://lantern.rknight.me](https://lantern.rknight.me)
