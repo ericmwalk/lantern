@@ -228,11 +228,12 @@
             
                 let titleText = result.title;
             
-                // Only add authors and "by" if the selected type is "book"
+                // Add authors and "by" only if the selected type is "book"
                 if (getActiveType() === 'book' && result.authors) {
                     titleText += ` by ${result.authors}`;
                 }
             
+                // Add year if available
                 if (result.year) {
                     titleText += ` (${result.year})`;
                 }
@@ -246,6 +247,7 @@
             
                 document.getElementById('search-results').append(el);
             };
+
 
 
         })();
