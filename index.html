@@ -229,15 +229,12 @@
                 // Add authors data only if it's a book
                 if (getActiveType() === 'book') {
                     el.dataset.authors = result.authors;
+                    let titleText = result.title;
+                    titleText += ` by ${result.authors}`;
                 } else {
                     el.dataset.authors = ''; // Ensure it's empty for non-book types
                 }
                         
-             // Create a title with the format: "Title (by Authors) (Year)"
-                let titleText = result.title;
-                if (result.authors) {
-                    titleText += ` by ${result.authors}`;
-                }
                 if (result.year) {
                     titleText += ` (${result.year})`;
                 }
