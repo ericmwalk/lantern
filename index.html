@@ -185,7 +185,7 @@
                 results.map(r => {
                     renderResult(r);
                 });
-
+            
                 document.querySelectorAll('.result').forEach(item => {
                     item.addEventListener('click', e => {
                         e.preventDefault();
@@ -196,10 +196,18 @@
                         });
                         const type = getActiveType();
                         const dataset = e.currentTarget.dataset;
-                        let postTitle = `[${dataset.title}${dataset.year && dataset.year !== 'null' ? ` (${dataset.year})` : ''}](${dataset.link}) by ${dataset.authors}`;
-                        if (getRating()){
+            
+                        // Conditionally add 'by' and authors only if authors exist for books
+                        let postTitle = `[${dataset.title}${dataset.year && dataset.year !== 'null' ? ` (${dataset.year})` : ''}](${dataset.link})`;
+                        if (getActiveType() === 'book' && dataset.authors) {
+                            postTitle += ` by ${dataset.authors}`;
+                        }
+            
+                        // Add rating if available
+                        if (getRating()) {
                             postTitle += ` - ${getRating()}`;
                         }
+            
                         const emojis = {
                             'tv': '📺',
                             'movie': '🍿',
@@ -215,7 +223,7 @@
                     });
                 });
             };
-
+            
             renderResult = (result) => {
                 const el = document.getElementById("result_template").cloneNode(true);
                 el.id = null;
@@ -226,17 +234,17 @@
                 el.dataset.poster = result.poster;
                 el.dataset.backdrop = result.backdrop;
                 
-                // Add authors data only if it's a book
+                // Only set authors for books
                 if (getActiveType() === 'book') {
                     el.dataset.authors = result.authors;
                 } else {
                     el.dataset.authors = ''; // Ensure it's empty for non-book types
                 }
-            
-                // Create a title with the format: "Title - Authors (Year)"
+                
+                // Create the title
                 const titleText = `${result.title}${result.authors ? ` by ${result.authors}` : ''}${result.year ? ` (${result.year})` : ''}`;
                 el.getElementsByClassName('result__title')[0].innerText = titleText;
-            
+                
                 // Set background image (if available)
                 if (result.backdrop || result.poster) {
                     el.style.backgroundImage = `url('${result.backdrop || result.poster}')`;
@@ -244,6 +252,7 @@
             
                 document.getElementById('search-results').append(el);
             };
+
 
 
         })();
