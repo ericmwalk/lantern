@@ -225,19 +225,16 @@
                 el.dataset.link = result.link;
                 el.dataset.poster = result.poster;
                 el.dataset.backdrop = result.backdrop;
-            
-                let titleText = result.title;
-            
-                // Add authors and "by" only if the selected type is "book" and authors exist
-                if (getActiveType() === 'book' && result.authors && result.authors.trim() !== '') {
-                    titleText += ` by ${result.authors}`;
+                
+                // Add authors data only if it's a book
+                if (getActiveType() === 'book') {
+                    el.dataset.authors = result.authors;
+                } else {
+                    el.dataset.authors = ''; // Ensure it's empty for non-book types
                 }
             
-                // Add year if available
-                if (result.year) {
-                    titleText += ` (${result.year})`;
-                }
-            
+                // Create a title with the format: "Title - Authors (Year)"
+                const titleText = `${result.title}${result.authors ? ` by ${result.authors}` : ''}${result.year ? ` (${result.year})` : ''}`;
                 el.getElementsByClassName('result__title')[0].innerText = titleText;
             
                 // Set background image (if available)
@@ -247,6 +244,7 @@
             
                 document.getElementById('search-results').append(el);
             };
+
 
         })();
     </script>
